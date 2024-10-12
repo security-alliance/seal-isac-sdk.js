@@ -2,7 +2,9 @@
 
 import yargsFactory from "yargs";
 import { hideBin } from "yargs/helpers";
-import { SealIsacSDK } from "../src/index.js";
+import { WebContentClient } from "../src/index.js";
+import { OpenCTIClient } from "@security-alliance/opencti-client/dist/src/opencti.js";
+import { Identifier } from "@security-alliance/stix/dist/2.1/types.js";
 
 const yargs = yargsFactory(hideBin(process.argv));
 
@@ -49,7 +51,7 @@ if (!apiKey) {
     process.exit(1);
 }
 
-const identity = process.env.SEAL_ISAC_IDENTITY;
+const identity = process.env.SEAL_ISAC_IDENTITY as Identifier<"identity"> | undefined;
 if (!identity) {
     console.log("please set SEAL_ISAC_IDENTITY");
     process.exit(1);
@@ -57,41 +59,47 @@ if (!identity) {
 
 const command = options._[0];
 
-const client = new SealIsacSDK(process.env.SEAL_ISAC_HOST || "https://sealisac.org", process.env.SEAL_ISAC_API_KEY!);
+const client = new WebContentClient(
+    new OpenCTIClient(process.env.SEAL_ISAC_HOST || "https://sealisac.org", process.env.SEAL_ISAC_API_KEY!),
+);
 
 if (command === "block-url") {
     console.log(`[+] blocking url ${options.url}`);
 
     const url = new URL(options.url as string);
-    const status = await client.getDomainStatus(url.hostname);
+    const status = await client.getWebContentStatus({
+        type: "domain-name",
+        value: url.hostname,
+    });
 
-    if (status === "allowlisted" && !options.force) {
-        console.log(`[+] url is currently allowlisted, please use --force to override`);
+    if (status === "trusted" && !options.force) {
+        console.log(`[+] url is currently trusted, please use --force to override`);
         process.exit(1);
     }
 
-    if (status === "blocklisted") {
-        console.log(`[+] url is already blocklisted`);
+    if (status === "blocked") {
+        console.log(`[+] url is already blocked`);
         process.exit(0);
     }
 
-    await client.addToBlocklist(url.hostname, identity);
+    await client.blockWebContent({ type: "domain-name", value: url.host }, identity);
 
-    console.log(
-        `[+] added ${url.hostname} to blocklist${status === "allowlisted" ? " and removed from allowlist" : ""}`,
-    );
+    console.log(`[+] blocked${status === "trusted" ? " and untrusted" : ""} ${url.hostname}`);
 } else if (command === "unblock-url") {
     console.log(`[+] unblocking url ${options.url}`);
 
     const url = new URL(options.url as string);
-    const status = await client.getDomainStatus(url.hostname);
+    const status = await client.getWebContentStatus({
+        type: "domain-name",
+        value: url.hostname,
+    });
 
-    if (status !== "blocklisted") {
-        console.log(`[+] url is not blocklisted`);
+    if (status !== "blocked") {
+        console.log(`[+] url is not blocked`);
         process.exit(1);
     }
 
-    await client.removeFromBlocklist(url.hostname);
+    await client.unblockWebContent({ type: "domain-name", value: url.hostname });
 
     console.log(`[+] removed ${url.hostname} from blocklist`);
 } else if (command === "allow-url") {
@@ -99,11 +107,12 @@ if (command === "block-url") {
 
     const url = new URL(options.url as string);
 
-    const status = await client.getDomainStatus(url.hostname);
+    const status = await client.getWebContentStatus({
+        type: "domain-name",
+        value: url.hostname,
+    });
 
-    await client.addToAllowlist(url.hostname, identity);
+    await client.trustWebContent({ type: "domain-name", value: url.hostname }, identity);
 
-    console.log(
-        `[+] added ${url.hostname} to allowlist${status === "blocklisted" ? " and removed from blocklist" : ""}`,
-    );
+    console.log(`[+] trusted${status === "blocked" ? " and unblocked" : ""}  ${url.hostname}`);
 }

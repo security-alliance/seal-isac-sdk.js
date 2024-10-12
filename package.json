@@ -8,7 +8,9 @@
     "scripts": {
         "build": "rm -rf dist; tsc",
         "test": "mocha",
-        "prepublishOnly": "npm run build"
+        "prepublishOnly": "npm run build",
+        "prettier:check": "npx prettier -c \"**/*.{js,ts,md,json,yml,yaml}\"",
+        "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,json,yml,yaml}\""
     },
     "bin": {
         "seal-isac": "dist/bin/index.js"
@@ -23,10 +25,11 @@
     "private": false,
     "dependencies": {
         "@apollo/client": "^3.10.4",
-        "@security-alliance/opencti-client": "^0.0.14",
+        "@security-alliance/opencti-client": "^0.0.17",
         "@security-alliance/stix": "^0.0.5",
         "apollo-upload-client": "^18.0.1",
         "graphql": "^16.8.1",
+        "tldts": "^6.1.50",
         "yargs": "^17.7.2"
     },
     "devDependencies": {
@@ -34,6 +37,7 @@
         "@types/node": "^20.12.7",
         "@types/yargs": "^17.0.33",
         "mocha": "^10.7.3",
+        "prettier": "^3.3.3",
         "tsx": "^4.19.1",
         "typescript": "^5.4.5"
     }

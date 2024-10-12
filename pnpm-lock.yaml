@@ -12,8 +12,8 @@ importers:
         specifier: ^3.10.4
         version: 3.11.7(graphql@16.9.0)
       '@security-alliance/opencti-client':
-        specifier: ^0.0.14
-        version: 0.0.14
+        specifier: ^0.0.17
+        version: 0.0.17
       '@security-alliance/stix':
         specifier: ^0.0.5
         version: 0.0.5
@@ -23,6 +23,9 @@ importers:
       graphql:
         specifier: ^16.8.1
         version: 16.9.0
+      tldts:
+        specifier: ^6.1.50
+        version: 6.1.50
       yargs:
         specifier: ^17.7.2
         version: 17.7.2
@@ -39,6 +42,9 @@ importers:
       mocha:
         specifier: ^10.7.3
         version: 10.7.3
+      prettier:
+        specifier: ^3.3.3
+        version: 3.3.3
       tsx:
         specifier: ^4.19.1
         version: 4.19.1
@@ -218,11 +224,8 @@ packages:
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@security-alliance/opencti-client@0.0.14':
-    resolution: {integrity: sha512-CjzMPxNILT/aVNXw03VOVTxvtaIN63dAnoAEhhwA0qLo0uhk9vPY5jK/bgq02MzQeE92mALU2CHSfPTkTR/RDw==}
-
-  '@security-alliance/stix@0.0.3':
-    resolution: {integrity: sha512-6/uR6ADleIuwtVG1Wb9QmblPxOcg7Gc1QpQe0dJqgyLTMs2Y/vJViMce8OaCLhuu7YSriMWWZ99Xw8soGFi8Gg==}
+  '@security-alliance/opencti-client@0.0.17':
+    resolution: {integrity: sha512-rb/qpiAaJ698HVHrBI3oem4AZBOF8ccRO5f6jpgL0Y/QtK+1QZpYv+LN6ZF8wnUPh3iVvwFjUsWgqjfhpZqSsA==}
 
   '@security-alliance/stix@0.0.5':
     resolution: {integrity: sha512-Xa8L5PPrhiP0f7pAq3VlvUhWAxRf6PpgnnHhuzZpAwLudE7f9KujZ63MbWi7YmWXPVrp75PO4FsfC4Fp26tEDg==}
@@ -371,6 +374,9 @@ packages:
   extract-files@13.0.0:
     resolution: {integrity: sha512-FXD+2Tsr8Iqtm3QZy1Zmwscca7Jx3mMC5Crr+sEP1I303Jy1CYMuYCm7hRTplFNg3XdUavErkxnTzpaqdSoi6g==}
     engines: {node: ^14.17.0 || ^16.0.0 || >= 18.0.0}
+
+  fast-json-patch@3.1.1:
+    resolution: {integrity: sha512-vf6IHUX2SBcA+5/+4883dsIjpBTqmfBjmYiWK1savxQmFk4JfBMLa7ynTYOs1Rolp/T1betJxHiGD3g1Mn8lUQ==}
 
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
@@ -532,6 +538,11 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
 
+  prettier@3.3.3:
+    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
 
@@ -596,6 +607,13 @@ packages:
   symbol-observable@4.0.0:
     resolution: {integrity: sha512-b19dMThMV4HVFynSAM1++gBHAbk2Tc/osgLIBZMKsyqh34jb2e8Os7T6ZW/Bt3pJFdBTd2JwAnAAEQV7rSNvcQ==}
     engines: {node: '>=0.10'}
+
+  tldts-core@6.1.50:
+    resolution: {integrity: sha512-na2EcZqmdA2iV9zHV7OHQDxxdciEpxrjbkp+aHmZgnZKHzoElLajP59np5/4+sare9fQBfixgvXKx8ev1d7ytw==}
+
+  tldts@6.1.50:
+    resolution: {integrity: sha512-q9GOap6q3KCsLMdOjXhWU5jVZ8/1dIib898JBRLsN+tBhENpBDcAVQbE0epADOjw11FhQQy9AcbqKGBQPUfTQA==}
+    hasBin: true
 
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
@@ -769,13 +787,14 @@ snapshots:
     dependencies:
       graphql: 16.9.0
 
-  '@security-alliance/opencti-client@0.0.14':
+  '@security-alliance/opencti-client@0.0.17':
     dependencies:
       '@apollo/client': 3.11.7(graphql@16.9.0)
       '@blakeembrey/deque': 1.0.5
-      '@security-alliance/stix': 0.0.3
+      '@security-alliance/stix': 0.0.5
       apollo-upload-client: 18.0.1(@apollo/client@3.11.7(graphql@16.9.0))(graphql@16.9.0)
       eventsource: 2.0.2
+      fast-json-patch: 3.1.1
       graphql: 16.9.0
       json-canonicalize: 1.0.6
       uuid: 10.0.0
@@ -785,11 +804,6 @@ snapshots:
       - react
       - react-dom
       - subscriptions-transport-ws
-
-  '@security-alliance/stix@0.0.3':
-    dependencies:
-      json-canonicalize: 1.0.6
-      uuid: 10.0.0
 
   '@security-alliance/stix@0.0.5':
     dependencies:
@@ -961,6 +975,8 @@ snapshots:
     dependencies:
       is-plain-obj: 4.1.0
 
+  fast-json-patch@3.1.1: {}
+
   fill-range@7.1.1:
     dependencies:
       to-regex-range: 5.0.1
@@ -1114,6 +1130,8 @@ snapshots:
 
   picomatch@2.3.1: {}
 
+  prettier@3.3.3: {}
+
   prop-types@15.8.1:
     dependencies:
       loose-envify: 1.4.0
@@ -1165,6 +1183,12 @@ snapshots:
       has-flag: 4.0.0
 
   symbol-observable@4.0.0: {}
+
+  tldts-core@6.1.50: {}
+
+  tldts@6.1.50:
+    dependencies:
+      tldts-core: 6.1.50
 
   to-regex-range@5.0.1:
     dependencies:
