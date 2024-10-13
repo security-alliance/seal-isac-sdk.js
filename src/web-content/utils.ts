@@ -1,13 +1,13 @@
+import {
+    generateDomainNameId,
+    generateIPv4AddrId,
+    generateIPv6AddrId,
+    generateUrlId,
+    Identifier,
+} from "@security-alliance/stix/2.1";
 import { isIPv4, isIPv6 } from "node:net";
 import { parse } from "tldts";
 import { WebContent, WebContentType } from "./types.js";
-import {
-    generateDomainObservableId,
-    generateIPv4ObservableId,
-    generateIPv6ObservableId,
-    generateUrlObservableId,
-} from "@security-alliance/stix/dist/2.1/identifiers.js";
-import { Identifier } from "@security-alliance/stix/dist/2.1/types.js";
 
 export const parseWebContent = (value: string): WebContent | undefined => {
     if (isIPv4(value)) return { type: "ipv4-addr", value: value };
@@ -44,13 +44,13 @@ export const generatePatternForUrl = (url: string) => {
 export const generateObservableIdForWebContent = (content: WebContent): Identifier<WebContentType> => {
     switch (content.type) {
         case "domain-name":
-            return generateDomainObservableId(content);
+            return generateDomainNameId(content);
         case "ipv4-addr":
-            return generateIPv4ObservableId(content);
+            return generateIPv4AddrId(content);
         case "ipv6-addr":
-            return generateIPv6ObservableId(content);
+            return generateIPv6AddrId(content);
         case "url":
-            return generateUrlObservableId(content);
+            return generateUrlId(content);
     }
 };
 

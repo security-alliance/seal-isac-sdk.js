@@ -1,4 +1,4 @@
-import { DomainName, IPv4Addr, IPv6Addr, Url } from "@security-alliance/stix/dist/2.1/types.js";
+import { DomainName, IPv4Addr, IPv6Addr, Url } from "@security-alliance/stix/2.1";
 
 /**
  * @deprecated no longer supported

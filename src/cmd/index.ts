@@ -2,13 +2,11 @@
 
 import yargsFactory from "yargs";
 import { hideBin } from "yargs/helpers";
-import { WebContentClient } from "../src/index.js";
-import { OpenCTIClient } from "@security-alliance/opencti-client/dist/src/opencti.js";
-import { Identifier } from "@security-alliance/stix/dist/2.1/types.js";
+import { WebContentClient } from "../index.js";
+import { OpenCTIClient } from "@security-alliance/opencti-client";
+import { Identifier } from "@security-alliance/stix/2.1";
 
 const yargs = yargsFactory(hideBin(process.argv));
-
-const usage = "\nUsage: tran <lang_name> sentence to be translated";
 
 const options = yargs
     .scriptName("seal-isac")

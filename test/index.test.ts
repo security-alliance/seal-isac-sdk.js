@@ -1,9 +1,9 @@
-import { generateIdentityId } from "@security-alliance/opencti-client/dist/src/stix/identifiers.js";
+import { generateIdentityId } from "@security-alliance/opencti-client/stix";
 import { describe, it } from "node:test";
 import { randomInt, randomUUID } from "node:crypto";
 import assert from "node:assert";
 import { WebContentClient } from "../src/index.js";
-import { OpenCTIClient } from "@security-alliance/opencti-client/dist/src/opencti.js";
+import { OpenCTIClient } from "@security-alliance/opencti-client";
 import { WebContent } from "../src/web-content/types.js";
 
 const apiKey = process.env.SEAL_ISAC_API_KEY!;

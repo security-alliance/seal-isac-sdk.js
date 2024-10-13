@@ -1,19 +1,34 @@
 {
     "name": "@security-alliance/seal-isac-sdk",
-    "version": "0.0.12",
-    "description": "SEAL-ISAC SDK for Security Alliance",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "version": "0.1.0",
+    "description": "SEAL-ISAC SDK",
+    "publishConfig": {
+        "access": "public"
+    },
     "type": "module",
+    "exports": {
+        ".": "./dist/index.js",
+        "./web-content": "./dist/web-content/index.js"
+    },
+    "typesVersions": {
+        "*": {
+            ".": [
+                "dist/index.d.ts"
+            ],
+            "./web-content": [
+                "dist/web-content/index.d.ts"
+            ]
+        }
+    },
     "scripts": {
-        "build": "rm -rf dist; tsc",
+        "build": "rm -rf dist; tsc -p tsconfig.release.json",
         "test": "mocha",
         "prepublishOnly": "npm run build",
         "prettier:check": "npx prettier -c \"**/*.{js,ts,md,json,yml,yaml}\"",
         "prettier:fix": "npx prettier -w \"**/*.{js,ts,md,json,yml,yaml}\""
     },
     "bin": {
-        "seal-isac": "dist/bin/index.js"
+        "seal-isac": "dist/cmd/index.js"
     },
     "keywords": [
         "seal-isac",
@@ -22,11 +37,13 @@
     ],
     "author": "Security Alliance",
     "license": "UNLICENSED",
-    "private": false,
+    "files": [
+        "dist/"
+    ],
     "dependencies": {
         "@apollo/client": "^3.10.4",
-        "@security-alliance/opencti-client": "^0.0.17",
-        "@security-alliance/stix": "^0.0.5",
+        "@security-alliance/opencti-client": "0.1.1",
+        "@security-alliance/stix": "^0.1.0",
         "apollo-upload-client": "^18.0.1",
         "graphql": "^16.8.1",
         "tldts": "^6.1.50",

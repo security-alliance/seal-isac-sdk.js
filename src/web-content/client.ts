@@ -1,10 +1,8 @@
-import { OpenCTIClient } from "@security-alliance/opencti-client/dist/src/index.js";
-import { MARKING_TLP_CLEAR } from "@security-alliance/opencti-client/dist/src/stix/constants.js";
-import { generateIndicatorId, generateLabelId } from "@security-alliance/opencti-client/dist/src/stix/identifiers.js";
-import { Indicator, Label, Observable } from "@security-alliance/opencti-client/dist/src/types.js";
-import { Identifier } from "@security-alliance/stix/dist/2.1/types.js";
+import { Indicator, Label, Observable, OpenCTIClient } from "@security-alliance/opencti-client";
+import { generateIndicatorId, generateLabelId, MARKING_TLP_CLEAR } from "@security-alliance/opencti-client/stix";
+import { Identifier } from "@security-alliance/stix/2.1";
 import { ALLOWLISTED_DOMAIN_LABEL, BLOCKLISTED_DOMAIN_LABEL, TRUSTED_WEB_CONTENT_LABEL, WebContent } from "./types.js";
-import { generatePatternForWebContent, generateObservableIdForWebContent } from "./utils.js";
+import { generateObservableIdForWebContent, generatePatternForWebContent } from "./utils.js";
 
 type CreateOrUpdateProperties = {
     creator?: Identifier<"identity">;
