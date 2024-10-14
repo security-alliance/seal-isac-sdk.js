@@ -10,6 +10,19 @@ type CreateOrUpdateProperties = {
     removeLabels?: string[];
 };
 
+const toOpenCTIObservableType = (type: "domain-name" | "ipv4-addr" | "ipv6-addr" | "url") => {
+    switch (type) {
+        case "domain-name":
+            return "Domain-Name";
+        case "ipv4-addr":
+            return "IPv4-Addr";
+        case "ipv6-addr":
+            return "IPv6-Addr";
+        case "url":
+            return "Url";
+    }
+};
+
 export class WebContentClient {
     private client: OpenCTIClient;
 
@@ -40,7 +53,7 @@ export class WebContentClient {
             name: content.value,
             pattern_type: "stix",
             pattern: generatePatternForWebContent(content),
-            x_opencti_main_observable_type: content.type,
+            x_opencti_main_observable_type: toOpenCTIObservableType(content.type),
             x_opencti_score: 100,
             valid_from: new Date(),
         });
