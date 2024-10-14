@@ -1,6 +1,6 @@
 {
     "name": "@security-alliance/seal-isac-sdk",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "SEAL-ISAC SDK",
     "publishConfig": {
         "access": "public"
@@ -43,7 +43,7 @@
     "dependencies": {
         "@apollo/client": "^3.10.4",
         "@security-alliance/opencti-client": "0.1.1",
-        "@security-alliance/stix": "^0.1.0",
+        "@security-alliance/stix": "^0.1.1",
         "apollo-upload-client": "^18.0.1",
         "graphql": "^16.8.1",
         "tldts": "^6.1.50",
