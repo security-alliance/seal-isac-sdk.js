@@ -40,6 +40,7 @@ export class WebContentClient {
             name: content.value,
             pattern_type: "stix",
             pattern: generatePatternForWebContent(content),
+            x_opencti_main_observable_type: content.type,
             x_opencti_score: 100,
             valid_from: new Date(),
         });
