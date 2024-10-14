@@ -1,6 +1,6 @@
 {
     "name": "@security-alliance/seal-isac-sdk",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "SEAL-ISAC SDK",
     "publishConfig": {
         "access": "public"

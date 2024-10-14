@@ -23,6 +23,8 @@ const toOpenCTIObservableType = (type: "domain-name" | "ipv4-addr" | "ipv6-addr"
     }
 };
 
+const ONE_YEAR_IN_MILLIS = 1000 * 60 * 60 * 24 * 365;
+
 export class WebContentClient {
     private client: OpenCTIClient;
 
@@ -36,13 +38,15 @@ export class WebContentClient {
 
         observable: Observable,
     ): Promise<Indicator> {
+        const now = Date.now();
+
         const existingIndicator = await this.client.getIndicator(
             generateIndicatorId({ pattern: generatePatternForWebContent(content) }),
         );
         if (existingIndicator !== null) {
             return await this.client.editIndicator(existingIndicator.id, [
-                { key: "valid_from", value: [new Date()] },
-                { key: "valid_until", value: [new Date(Date.now() + 1)] },
+                { key: "valid_from", value: [new Date(now)] },
+                { key: "valid_until", value: [new Date(now + ONE_YEAR_IN_MILLIS)] },
                 { key: "x_opencti_score", value: [100] },
                 { key: "revoked", value: [false] },
             ]);
@@ -55,7 +59,8 @@ export class WebContentClient {
             pattern: generatePatternForWebContent(content),
             x_opencti_main_observable_type: toOpenCTIObservableType(content.type),
             x_opencti_score: 100,
-            valid_from: new Date(),
+            valid_from: new Date(now),
+            valid_until: new Date(now + ONE_YEAR_IN_MILLIS),
         });
 
         await this.client.addIndicatorRelationship(indicator.id, observable.id, "based-on");
