@@ -187,6 +187,13 @@ export class WebContentClient {
     }
 
     public async unblockWebContent(content: WebContent): Promise<Indicator | undefined> {
+        const observable = await this.client.getStixCyberObservable(generateObservableIdForWebContent(content));
+        if (observable !== null) {
+            await this.updateObservable(observable, {
+                removeLabels: [ALLOWLISTED_DOMAIN_LABEL, BLOCKLISTED_DOMAIN_LABEL, TRUSTED_WEB_CONTENT_LABEL],
+            });
+        }
+
         const indicator = await this.client.getIndicator(
             generateIndicatorId({ pattern: generatePatternForWebContent(content) }),
         );
@@ -210,7 +217,7 @@ export class WebContentClient {
         if (observable === null) return undefined;
 
         return await this.updateObservable(observable, {
-            removeLabels: [ALLOWLISTED_DOMAIN_LABEL, TRUSTED_WEB_CONTENT_LABEL],
+            removeLabels: [BLOCKLISTED_DOMAIN_LABEL, ALLOWLISTED_DOMAIN_LABEL, TRUSTED_WEB_CONTENT_LABEL],
         });
     }
 }
