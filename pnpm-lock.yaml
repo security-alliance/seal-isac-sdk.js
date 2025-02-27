@@ -12,8 +12,8 @@ importers:
         specifier: ^3.10.4
         version: 3.11.7(graphql@16.9.0)
       '@security-alliance/opencti-client':
-        specifier: 0.2.0
-        version: 0.2.0
+        specifier: 0.2.1
+        version: 0.2.1
       '@security-alliance/stix':
         specifier: ^0.1.1
         version: 0.1.1
@@ -224,8 +224,8 @@ packages:
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
 
-  '@security-alliance/opencti-client@0.2.0':
-    resolution: {integrity: sha512-0yCkG0K4rvbmWlLUCyvQHMw8LhSSSRUGa6Hec/Ny/p/Gw9c44LkhO17m8LHlWL9Rfj+ZSaNQarFH5bsiawgPww==}
+  '@security-alliance/opencti-client@0.2.1':
+    resolution: {integrity: sha512-HO/IyeK7XHqd08137BSYo6nAnQgFCD9DFwUy2VvLrLYtq0hVDmEhyKLCwaOHcFl9b34Uo7xdQjtINJ8wzfTn/A==}
 
   '@security-alliance/stix@0.1.1':
     resolution: {integrity: sha512-qGWBAsX0mfapeGT1IKmhax2RcXcYoDGaWZNYtkE1suIvv1F8xF69N/IJg3ifzGsW/vK7cBvBGxmOMfRaH+D0iA==}
@@ -791,7 +791,7 @@ snapshots:
     dependencies:
       graphql: 16.9.0
 
-  '@security-alliance/opencti-client@0.2.0':
+  '@security-alliance/opencti-client@0.2.1':
     dependencies:
       '@apollo/client': 3.11.7(graphql@16.9.0)
       '@blakeembrey/deque': 1.0.5
