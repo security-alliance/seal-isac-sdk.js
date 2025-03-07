@@ -198,6 +198,7 @@ export class WebContentClient {
             generateIndicatorId({ pattern: generatePatternForWebContent(content) }),
         );
         if (indicator === null) return undefined;
+        if (indicator.revoked) return indicator;
 
         return await this.client.editIndicator(indicator.id, [{ key: "x_opencti_score", value: [0] }]);
     }
